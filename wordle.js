@@ -7,7 +7,7 @@ function chooseRandomWord() {
 let chosenWord = chooseRandomWord();
 
 function isLetterInWord(letter) {
-    if(chosenWord.indexOf(letter) > 0) {
+    if(chosenWord.indexOf(letter) > -1) {
         return letter + " is in the chosen word!"
     }
     else {
@@ -18,3 +18,4 @@ function isLetterInWord(letter) {
 console.log(chosenWord);
 
 console.log(isLetterInWord("a"));
+
