@@ -1,21 +1,40 @@
 let words = ["daisy", "henge", "roots", "bathe", "shoes", "fluff", "dirty", "clean", "roads", "kitty", "tiger", "grass", "bench", "range", "acres", "blank", "walls", "viola", "words", "hives", "hover", "mouse", "honey", "scarf", "trees", "hares", "books", "tease", "zebra", "lolly"];
 
-function chooseRandomWord() {
-    return words[Math.floor(Math.random() * words.length)];
+let alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+function chooseRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
 
-let chosenWord = chooseRandomWord();
+let chosenWord = chooseRandomItem(words);
+let chosenLetter = chooseRandomItem(alphabet);
 
 function isLetterInWord(letter) {
     if(chosenWord.indexOf(letter) > -1) {
-        return letter + " is in the chosen word!"
+        return `Yes, "${letter}" is in the chosen word!`;
     }
     else {
-        return "Nope. Not here."
+        return `Letter "${letter}", let's see... Nope, not in ${chosenWord}.`;
     }
 }
 
-console.log(chosenWord);
+console.log(`This function chooses a random word: ${chosenWord}`);
 
-console.log(isLetterInWord("a"));
+console.log(`This function checks whether a given letter is in a word: ${isLetterInWord(chosenLetter)}`);
 
+function locateLetterInWord(letter, word) {
+    let result = "";
+    for (let i = 0; i < word.length; i++) {
+        if(word[i] === letter) {
+            result += "✓";
+        }
+        else {
+            result += "X";
+        }
+    }
+    return result;
+}
+
+
+
+console.log(`This function locates a given letter (${chosenLetter}) in a word (${chosenWord}): ${locateLetterInWord(chosenLetter, chosenWord)}`);
