@@ -1,12 +1,23 @@
 $(function() {
 
 let $button = $('#button');
-let $textField = $('#textfield')
+let $textField = $('#textfield');
   
-$button.on('click', changeColor); 
+$button.on('click', checkColor); 
 
-function changeColor() {
-  $textField.addClass('red');
+function checkColor() {
+  let input = $textField.val();
+
+  if(input === "red" || input === "blue" || input === "lavender" || input === "green" || input === "turquoise" || input === "orange" || input === "pink") {
+    changeColor(input);
+  }
+  else {
+    changeColor('#333333');
+  }
+}
+
+function changeColor(color) {
+  $textField.css('color', color);
 }
 
 });
