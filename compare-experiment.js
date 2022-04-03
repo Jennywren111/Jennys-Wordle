@@ -1,19 +1,32 @@
-let answer = ["c", "a", "t"];
+let todaysWord = "cat";
+let todaysWordArray = todaysWord.split("");
 
-let guess = ["b", "a", "r"];
+let guess = "tab";
+let guessArray = guess.split("");
 
-function findLetterInCorrectPlace(guess, answer) {
+let result = ["1", "2", "3"];
+
+// Can I 'DRY' the above? Array thing is repetitive.
+
+function findLetterInCorrectPlace(guess, word) {
     
-    // Check if item at same index of each array is same. If it is, log it. Else, log X.  
+    // Check if item at same index of each array is same. If it is, place it in 'result' & remove matching item from todaysWordArray. Else, add X to result. 
     for (let i = 0; i < guess.length; i++) {
-        if(guess[i] === answer[i]) {
-            console.log(guess[i]);
+        if(guess[i] === word[i]) {
+            result[i] = word[i];
+            todaysWordArray.splice(i, 1);
         }
         else {
-            console.log("X");
+            result[i] = "X";
         }
     }
 
 }
 
-findLetterInCorrectPlace(guess, answer);
+// Identify correct letters in correct place, remove from todaysWord array
+// Identify correct letters in wrong place, replace with a non-alphabet symbol so as to not mess up the array (still to do this)
+
+findLetterInCorrectPlace(guessArray, todaysWordArray);
+console.log(`Guess: ${guessArray}`);
+console.log(`Today's word with matches removed: ${todaysWordArray}`);
+console.log(`Result: ${result}`);
