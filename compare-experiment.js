@@ -4,9 +4,9 @@ let todaysWordArray = todaysWord.split("");
 let guess = "tab";
 let guessArray = guess.split("");
 
-let result = ["1", "2", "3"];
+let result = [".", ".", "."];
 
-// Can I 'DRY' the above? Array thing is repetitive.
+// Can I 'DRY' the above? Array thing is repetitive. I will think on this once I capture the input for "guess".
 
 function findLetterInCorrectPlace(guess, word) {
     
