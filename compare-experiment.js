@@ -7,8 +7,6 @@ function findLetterInCorrectPlace(guess, word) {
 
     console.log(`Today's word: ${todaysWordArray}`);
 
-    // Check if item at same index of each array is same. If it is, place it in 'result' & remove matching item from todaysWordArray. Else, add X to result. 
-
     for (let i = 0; i < guess.length; i++) {
         if(guess[i] === word[i]) {
             result[i] = word[i];
