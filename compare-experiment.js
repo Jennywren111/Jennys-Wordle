@@ -1,5 +1,5 @@
 
-function findLetterInCorrectPlace(guess, word) {
+function findLettersInCorrectPlace(guess, word) {
 
     let todaysWordArray = word.split("");
     let guessArray = guess.split("");
@@ -23,8 +23,37 @@ function findLetterInCorrectPlace(guess, word) {
 
 }
 
-findLetterInCorrectPlace("cat", "bat");
+findLettersInCorrectPlace("cat", "bat");
+findLettersInCorrectPlace("bird", "bead");
+findLettersInCorrectPlace("tea", "tea");
 
-findLetterInCorrectPlace("bird", "bead");
 
-findLetterInCorrectPlace("tea", "tea");
+function matchLetters(guess, word) {
+    let index = 0;
+    for (let letter of guess) {
+
+        if (letter === word[index]) {
+            console.log(`${letter} is in the same place in ${guess} as ${word}!`);
+        }
+
+        else if (word.includes(letter)) {
+            console.log(`${letter} is present in ${word}.`);
+        }
+
+        else {
+            console.log(`${letter} is not present in ${word}.`);
+        }
+
+        index++;
+    }
+}
+
+// Next step - refactor above function to loop through exact matches first and replace with spaces. 
+// Look up frequency analysis and learn what it is.
+
+matchLetters("dog", "mad"); 
+matchLetters("now", "win");
+matchLetters("act", "cat");
+matchLetters("tat", "tot");
+matchLetters("mum", "umm");
+matchLetters("add", "day");
