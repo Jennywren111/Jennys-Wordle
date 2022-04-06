@@ -1,55 +1,29 @@
 
-function findLettersInCorrectPlace(guess, word) {
-
-    let todaysWordArray = word.split("");
-    let guessArray = guess.split("");
-    let result = [".", ".", "."];
-
-    console.log(`Today's word: ${todaysWordArray}`);
-
-    for (let i = 0; i < guess.length; i++) {
-        if(guess[i] === word[i]) {
-            result[i] = word[i];
-            todaysWordArray[i] = " ";
-        }
-        else {
-            result[i] = "*";
-        }
-    }
-
-    console.log(`Guess: ${guessArray}`);
-    console.log(`Today's word with matches removed: ${todaysWordArray}`);
-    console.log(`Result: ${result}`);
-
-}
-
-findLettersInCorrectPlace("cat", "bat");
-findLettersInCorrectPlace("bird", "bead");
-findLettersInCorrectPlace("tea", "tea");
-
-
 function matchLetters(guess, word) {
-    let index = 0;
-    for (let letter of guess) {
 
-        if (letter === word[index]) {
-            console.log(`${letter} is in the same place in ${guess} as ${word}!`);
+    let guessArray = guess.split("");
+    let wordArray = word.split("");
+
+    for (let i = 0; i < guessArray.length; i++) {
+
+        if (guessArray[i] === wordArray[i]) {
+            console.log(`${guessArray[i]} is in the same place in ${guess} as ${word}!`);
+            wordArray[i] = "_"; 
+            guessArray[i] = " ";
+            console.log(wordArray, guessArray);
         }
+    }
 
-        else if (word.includes(letter)) {
-            console.log(`${letter} is present in ${word}.`);
+    for (let i = 0; i < guessArray.length; i++) {
+
+        if (wordArray.indexOf(guessArray[i]) !== -1) {
+            console.log(`${guessArray[i]} is in ${guess} and ${word}, but not in the same place!`);
+            wordArray[wordArray.indexOf(guessArray[i])] = "_"; 
+            guessArray[i] = " ";
+            console.log(wordArray, guessArray);
         }
-
-        else {
-            console.log(`${letter} is not present in ${word}.`);
-        }
-
-        index++;
     }
 }
-
-// Next step - refactor above function to loop through exact matches first and replace with spaces. 
-// Look up frequency analysis and learn what it is.
 
 matchLetters("dog", "mad"); 
 matchLetters("now", "win");
