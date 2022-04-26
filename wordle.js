@@ -1,4 +1,16 @@
 
+// Testing logging and changing input value without jQuery - new learnings!
+
+let formInput = document.querySelector("input").value;
+console.log(formInput); // should log "Hello"
+
+document.querySelector("input").value = "Goodbye";
+console.log(document.querySelector("input").value); // should log "Goodbye"
+console.log(formInput); // should STILL log "Hello"
+
+
+// Need to refactor matchLetters to return guess with correct / incorrect markers. 
+
 function matchLetters(guess, word) {
 
     let guessArray = guess.split("");
@@ -23,11 +35,14 @@ function matchLetters(guess, word) {
             console.log(wordArray, guessArray);
         }
     }
+
 }
 
-matchLetters("dog", "mad"); 
-matchLetters("now", "win");
-matchLetters("act", "cat");
-matchLetters("tat", "tot");
-matchLetters("mum", "umm");
-matchLetters("add", "day");
+
+
+// matchLetters("dog", "mad")); 
+// matchLetters("now", "win");
+// matchLetters("act", "cat");
+// matchLetters("tat", "tot");
+// matchLetters("mum", "umm");
+// matchLetters("add", "day");
