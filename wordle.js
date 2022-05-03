@@ -4,56 +4,52 @@
 let guessInput = document.querySelector("input").value;
 console.log(guessInput); // should log "Hello"
 
-let testArray = ["<span class=\"red\">A</span>", "<span class=\"blue\">B</span>", "<span class=\"green\">C</span>", "", ""];
-let paragraph = document.createElement('p');
-let testHtmlString = testArray.join('');
-paragraph.innerHTML = testHtmlString;
-let resultDiv = document.querySelector("div#result");
-console.log(resultDiv);
-resultDiv.append(paragraph);
-
-// Need to refactor matchLetters to return guess with correct / incorrect markers. 
 
 function matchLetters(guess, word) {
 
+    let resultArray = ["", "", "", "", ""];
     let guessArray = guess.split("");
     let wordArray = word.split("");
 
     for (let i = 0; i < guessArray.length; i++) {
 
         if (guessArray[i] === wordArray[i]) {
-            console.log(`${guessArray[i]} is in the same place in ${guess} as ${word}!`);
+            resultArray[i] = `<span class=\"correct\">${guessArray[i]}</span>`;
             wordArray[i] = "_"; 
-            guessArray[i] = " ";
-            console.log(wordArray, guessArray);
+            guessArray[i] = ".";
         }
     }
 
     for (let i = 0; i < guessArray.length; i++) {
 
         if (wordArray.indexOf(guessArray[i]) !== -1) {
-            console.log(`${guessArray[i]} is in ${guess} and ${word}, but not in the same place!`);
+            resultArray[i] = `<span class=\"halfcorrect\">${guessArray[i]}</span>`;
             wordArray[wordArray.indexOf(guessArray[i])] = "_"; 
-            guessArray[i] = " ";
-            console.log(wordArray, guessArray);
+            guessArray[i] = ".";
+        }
+        else if (guessArray[i] !== ".") {
+            resultArray[i] = `<span class=\"incorrect\">${guessArray[i]}</span>`;
         }
     }
 
+    let paragraph = document.createElement('p');
+    let resultString = resultArray.join('');
+    paragraph.innerHTML = resultString;
+    let resultDiv = document.querySelector("div#result");
+    resultDiv.append(paragraph);
+
 }
 
+matchLetters("fluff", "fruit");
+matchLetters("snore", "sport");
+matchLetters("trace", "crate");
+matchLetters("heads", "death");
 
-
-// matchLetters("dog", "mad")); 
-// matchLetters("now", "win");
-// matchLetters("act", "cat");
-// matchLetters("tat", "tot");
-// matchLetters("mum", "umm");
-// matchLetters("add", "day");
 
 
 /* Instructions to self! 
 - Take input value, send it into function. 
-- function needs to push items into array (problems - how to add the letter plus the span HTML?)
+DONE - function needs to push items into array (problems - how to add the letter plus the span HTML?)
 - eventually, will need to run the function on click
 - scope! Where do all the variables need to be?
 - multiple guesses - that's going to make things complicated... Need to eventually rebuild in React or something.

@@ -1,11 +1,19 @@
 .red {
-    color: #DD0055;
+    color: #dd0000;
 }
 
 .blue {
-    color: #3377FF;
+    color: #0c67cf;
 }
 
-.green {
-    color: #008833;
+.correct {
+    color: #03a340;
+}
+
+.halfcorrect {
+    color: #f3cf04;
+}
+
+.incorrect {
+    color: #494949;
 }
