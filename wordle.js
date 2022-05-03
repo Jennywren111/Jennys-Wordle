@@ -4,7 +4,7 @@
 let guessInput = document.querySelector("input").value;
 console.log(guessInput); // should log "Hello"
 
-
+// SHould I refactor the below function and split the actions into separate functions...?
 function matchLetters(guess, word) {
 
     let resultArray = ["", "", "", "", ""];
