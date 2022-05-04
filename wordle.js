@@ -10,8 +10,8 @@ function matchLetters(word) {
     console.log(word);
     let guessInput = document.querySelector("input").value;
     let resultArray = ["", "", "", "", ""];
-    let guessArray = guessInput.split("");
-    let wordArray = word.split("");
+    let guessArray = guessInput.toUpperCase().split("");
+    let wordArray = word.toUpperCase().split("");
 
     for (let i = 0; i < guessArray.length; i++) {
 
