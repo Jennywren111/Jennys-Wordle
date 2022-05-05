@@ -39,6 +39,7 @@ function matchLetters(word) {
     paragraph.innerHTML = resultString;
     let resultDiv = document.querySelector("div#result");
     resultDiv.append(paragraph);
+    document.querySelector("input").value = "";
 
 }
 
