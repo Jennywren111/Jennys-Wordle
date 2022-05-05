@@ -1,10 +1,24 @@
 
 let words = ["daisy", "henge", "roots", "bathe", "shoes", "fluff", "dirty", "clean", "roads", "kitty", "tiger", "grass", "bench", "range", "acres", "blank", "walls", "viola", "words", "hives", "hover", "mouse", "honey", "scarf", "trees", "hares", "books", "tease", "zebra", "lolly"];
+const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 let chosenWord = words[Math.floor(Math.random() * words.length)];
 
+// This chunk of code is being repeated too often! I need to see if I can create a reusable function. 
+let alphabetParagraph = document.createElement('p');
+let alphabetString = alphabet.join('');
+alphabetParagraph.innerHTML = alphabetString;
+let alphabetDiv = document.querySelector("div#result");
+alphabetDiv.append(alphabetParagraph);
+
 let button = document.querySelector("button");
+let inputField = document.querySelector("input");
 button.addEventListener('click', () => matchLetters(chosenWord));
+inputField.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        matchLetters(chosenWord);
+    }
+});
 
 function matchLetters(word) {
     console.log(word);
@@ -17,6 +31,7 @@ function matchLetters(word) {
 
         if (guessArray[i] === wordArray[i]) {
             resultArray[i] = `<span class=\"correct\">${guessArray[i]}</span>`;
+            alphabet[alphabet.indexOf(guessArray[i].toUpperCase())] = `<span class=\"correct\">${guessArray[i]}</span>`;
             wordArray[i] = "_"; 
             guessArray[i] = ".";
         }
@@ -26,22 +41,33 @@ function matchLetters(word) {
 
         if (wordArray.indexOf(guessArray[i]) !== -1) {
             resultArray[i] = `<span class=\"halfcorrect\">${guessArray[i]}</span>`;
+            alphabet[alphabet.indexOf(guessArray[i].toUpperCase())] = `<span class=\"halfcorrect\">${guessArray[i]}</span>`;
             wordArray[wordArray.indexOf(guessArray[i])] = "_"; 
             guessArray[i] = ".";
         }
         else if (guessArray[i] !== ".") {
             resultArray[i] = `<span class=\"incorrect\">${guessArray[i]}</span>`;
+            alphabet[alphabet.indexOf(guessArray[i].toUpperCase())] = `<span class=\"incorrect\">${guessArray[i]}</span>`;
         }
     }
-
-    let paragraph = document.createElement('p');
+    
+    // DRY this code cos it's same as the bit that does the alphabet! Make a function.
+    let resultParagraph = document.createElement('p');
     let resultString = resultArray.join('');
-    paragraph.innerHTML = resultString;
+    resultParagraph.innerHTML = resultString;
     let resultDiv = document.querySelector("div#result");
-    resultDiv.append(paragraph);
+    resultDiv.append(resultParagraph);
+
+    // ....and this EXACT BIT OF CODE is used above! That can't be right! Note to self - don't be lazy Jenny!
+    alphabetString = alphabet.join('');
+    alphabetParagraph.innerHTML = alphabetString;
+    alphabetDiv = document.querySelector("div#result");
+    alphabetDiv.append(alphabetParagraph);
+
     document.querySelector("input").value = "";
 
 }
+
 
 /*
 matchLetters("fruit");
@@ -54,13 +80,13 @@ matchLetters(chosenWord);
 DONE - Take input value, send it into function. 
 DONE - function needs to push items into array (problems - how to add the letter plus the span HTML?)
 DONE - eventually, will need to run the function on click
-Thoughts...
-- scope! Where do all the variables need to be? What do I pass in as an argument and what do I just call in via its variable if that makes sense?
-- Refactor function to make more efficient, array methods might be better than for loops?
-- multiple guesses - that's going to make things complicated... Need to eventually rebuild in React or something.
-Next steps...
-- Log what letters have been used from alphabet
+- Add ability to hit enter key to submit guess
+DONE WITH SLIGHT ISSUE- Log what letters have been used from alphabet (currently stays green if you have EVER guessed a letter's position correctly)
 - Limit number of guesses to 6
 - Create more Wordle-like interface
 - Create result messages
+- Refactor function to make more efficient, array methods might be better than for loops?
+- REMOVE REPETITION!!! Particularly on the alphabet generating code.
+- Look at how alphabet colour coding is working - there is a logic problem here
+- Look to eventually rebuild using framework such as React
 */

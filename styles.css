@@ -23,6 +23,7 @@ input, #result {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.3em;
+    letter-spacing: 0.1em;
 }
 
 button {
@@ -41,7 +42,7 @@ button {
 }
 
 .incorrect {
-    color: #494949;
+    color: #919191;
 }
 
 #content {
@@ -51,4 +52,8 @@ button {
     max-width: 800px;
     margin: 0 auto;
     height: 100%;
+}
+
+#alphabet {
+    color: #252525;
 }
