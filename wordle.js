@@ -68,6 +68,16 @@ function matchLetters(word) {
 
 }
 
+// Creating function to replace some of the repeated code above - WORK IN PROGRESS
+function convertArraytoStrAndAppend(arr, div) {
+    let p = document.createElement('p');
+    let string = arr.join('');
+    p.innerHTML = string;
+    let divToAppend = document.querySelector(div);
+    divToAppend.append(p);
+}
+
+convertArraytoStrAndAppend(["Testing ", "my ", "function!"], "div#testfunction")
 
 /*
 matchLetters("fruit");
@@ -80,12 +90,12 @@ matchLetters(chosenWord);
 DONE - Take input value, send it into function. 
 DONE - function needs to push items into array (problems - how to add the letter plus the span HTML?)
 DONE - eventually, will need to run the function on click
-- Add ability to hit enter key to submit guess
+DONE - Add ability to hit enter key to submit guess
 DONE WITH SLIGHT ISSUE- Log what letters have been used from alphabet (currently stays green if you have EVER guessed a letter's position correctly)
 - Limit number of guesses to 6
 - Create more Wordle-like interface
 - Create result messages
-- Refactor function to make more efficient, array methods might be better than for loops?
+- Refactor function (split into fewer?), array methods might be better than for loops?
 - REMOVE REPETITION!!! Particularly on the alphabet generating code.
 - Look at how alphabet colour coding is working - there is a logic problem here
 - Look to eventually rebuild using framework such as React
