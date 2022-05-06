@@ -4,7 +4,10 @@
     let words = ["daisy", "henge", "roots", "bathe", "shoes", "fluff", "dirty", "clean", "roads", "kitty", "tiger", "grass", "bench", "range", "acres", "blank", "walls", "viola", "words", "hives", "hover", "mouse", "honey", "scarf", "trees", "hares", "books", "tease", "zebra", "lolly"];
     
     // Why does this array only seem to receive the first 'change' - for example, on first guess you get 'A' correct but in incorrect place, A goes yellow. If you get it in the correct place on guess 2, it doesn't go green. WHYYYY??? Console seems to log the new version at that position but in the actual array it's not there. Grrr.
+    // OF COURSE!!!! The function can't find the index of 'A' in alphabet cos it's been changed to <span> etc. So it doesn't add the new colour. 
+    // Maybe I need 2 arrays, one immutable alphabet string to find the index of the guess letter, and the existing alphabet array to actually be changed. 
     const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+    const alphabetIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     let chosenWord = words[Math.floor(Math.random() * words.length)];
 
@@ -51,7 +54,7 @@
             debugger;
             if (guess[i] === word[i]) {
                 result[i] = `<span class=\"correct\">${guess[i]}</span>`;
-                alphabet[alphabet.indexOf(guess[i].toUpperCase())] = `<span class=\"correct\">${guess[i]}</span>`;
+                alphabet[alphabetIndex.indexOf(guess[i].toUpperCase())] = `<span class=\"correct\">${guess[i]}</span>`;
                 word[i] = "_";
                 guess[i] = ".";
             }
