@@ -3,9 +3,6 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
-}
-
-body, button, input, p {
     font-size: 1.1em;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -14,16 +11,24 @@ h1 {
     color: #035379
 }
 
+button {
+    font-size: 1.2em;
+}
+
 h2, h3, h4, input {
     font-weight: normal;
     color: #31384e;
 }
 
-input, #result {
+input, #result, #alphabet {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.3em;
     letter-spacing: 0.1em;
+}
+
+p {
+    margin-bottom: 0;
 }
 
 button {
@@ -56,4 +61,5 @@ button {
 
 #alphabet {
     color: #252525;
+    padding-top: 30px;
 }
