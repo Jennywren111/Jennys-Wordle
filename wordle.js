@@ -32,7 +32,15 @@
         let guessArray = guessInput.toUpperCase().split("");
         let wordArray = word.toUpperCase().split("");
 
-        markCorrectMatches(guessArray, wordArray, resultArray);
+        // Refactor function to use forEach, as practice. Is this harder to read? Less obvious what the function does cos isn't named...
+        guessArray.forEach(function(letter, index, guess) {
+                if (letter === wordArray[index]) {
+                    resultArray[index] = `<span class=\"correct\">${letter}</span>`;
+                    alphabet[alphabetIndex.indexOf(letter.toUpperCase())] = `<span class=\"correct\">${letter}</span>`;
+                    wordArray[index] = "_";
+                    guess[index] = ".";
+                }
+        });
 
         markSemicorrectMatches(guessArray, wordArray, resultArray);
         
@@ -47,18 +55,6 @@
 
         document.querySelector("input").value = "";
 
-    }
-
-    function markCorrectMatches(guess, word, result) {
-        for (let i = 0; i < guess.length; i++) {
-            debugger;
-            if (guess[i] === word[i]) {
-                result[i] = `<span class=\"correct\">${guess[i]}</span>`;
-                alphabet[alphabetIndex.indexOf(guess[i].toUpperCase())] = `<span class=\"correct\">${guess[i]}</span>`;
-                word[i] = "_";
-                guess[i] = ".";
-            }
-        }
     }
 
     function markSemicorrectMatches(guess, word, result) {
