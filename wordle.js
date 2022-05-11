@@ -10,6 +10,7 @@
     const alphabetIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     let chosenWord = words[Math.floor(Math.random() * words.length)];
+    let guessNumber = 0;
 
     let alphabetString = alphabet.join('');
     let alphabetDiv = document.querySelector("#alphabet");
@@ -27,6 +28,11 @@
     function matchLetters(word) {
 
         console.log(word);
+
+        if (guessNumber >= 6) {
+            alert("Too many guesses! (Although the game won't actually stop you yet cos I haven't programmed that far!)")
+        }
+
         let guessInput = document.querySelector("input").value;
         let resultArray = ["", "", "", "", ""];
         let guessArray = guessInput.toUpperCase().split("");
@@ -54,6 +60,7 @@
         alphabetDiv.innerHTML = alphabetString;
 
         document.querySelector("input").value = "";
+        guessNumber++;
 
     }
 
