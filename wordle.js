@@ -17,7 +17,7 @@
     alphabetDiv.innerHTML = alphabetString;
 
     let button = document.querySelector("button");
-    let inputField = document.querySelector("input");
+    let inputField = document.querySelector(".textfield");
     button.addEventListener('click', () => matchLetters(chosenWord));
     inputField.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -30,37 +30,42 @@
         console.log(word);
 
         if (guessNumber >= 6) {
-            alert("Too many guesses! (Although the game won't actually stop you yet cos I haven't programmed that far!)")
+            inputField.setAttribute("readonly", "");
+            inputField.value = "No more guesses!";
         }
 
-        let guessInput = document.querySelector("input").value;
-        let resultArray = ["", "", "", "", ""];
-        let guessArray = guessInput.toUpperCase().split("");
-        let wordArray = word.toUpperCase().split("");
+        else {
 
-        // Refactor function to use forEach, as practice. Is this harder to read? Less obvious what the function does cos isn't named...
-        guessArray.forEach(function(letter, index, guess) {
-                if (letter === wordArray[index]) {
-                    resultArray[index] = `<span class=\"correct\">${letter}</span>`;
-                    alphabet[alphabetIndex.indexOf(letter.toUpperCase())] = `<span class=\"correct\">${letter}</span>`;
-                    wordArray[index] = "_";
-                    guess[index] = ".";
-                }
-        });
+            let guessInput = document.querySelector(".textfield").value;
+            let resultArray = ["", "", "", "", ""];
+            let guessArray = guessInput.toUpperCase().split("");
+            let wordArray = word.toUpperCase().split("");
 
-        markSemicorrectMatches(guessArray, wordArray, resultArray);
-        
-        let resultParagraph = document.createElement('p');
-        let resultString = resultArray.join('');
-        resultParagraph.innerHTML = resultString;
-        let resultDiv = document.querySelector("div#result");
-        resultDiv.append(resultParagraph);
+            // Refactor function to use forEach, as practice. Is this harder to read? Less obvious what the function does cos isn't named...
+            guessArray.forEach(function(letter, index, guess) {
+                    if (letter === wordArray[index]) {
+                        resultArray[index] = `<span class=\"correct\">${letter}</span>`;
+                        alphabet[alphabetIndex.indexOf(letter.toUpperCase())] = `<span class=\"correct\">${letter}</span>`;
+                        wordArray[index] = "_";
+                        guess[index] = ".";
+                    }
+            });
 
-        alphabetString = alphabet.join('');
-        alphabetDiv.innerHTML = alphabetString;
+            markSemicorrectMatches(guessArray, wordArray, resultArray);
+            
+            let resultParagraph = document.createElement('p');
+            let resultString = resultArray.join('');
+            resultParagraph.innerHTML = resultString;
+            let resultDiv = document.querySelector("div#result");
+            resultDiv.append(resultParagraph);
 
-        document.querySelector("input").value = "";
-        guessNumber++;
+            alphabetString = alphabet.join('');
+            alphabetDiv.innerHTML = alphabetString;
+
+            inputField.value = "";
+            guessNumber++;
+
+        }
 
     }
 
