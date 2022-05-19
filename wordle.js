@@ -16,10 +16,58 @@
     let alphabetDiv = document.querySelector("#alphabet");
     alphabetDiv.innerHTML = alphabetString;
 
+    // input fields
+    let letter1 = document.querySelector('#letter1');
+    let letter2 = document.querySelector('#letter2');
+    let letter3 = document.querySelector('#letter3');
+    let letter4 = document.querySelector('#letter4');
+    let letter5 = document.querySelector('#letter5');
+
+    // Autotab code - backspace has been a bit buggy (is it just slow using this method?) - keep an eye!! Also, keyup, keydown and keypress all seem to behave differently. Why??
+    letter1.addEventListener('keyup', (e) => {
+        if (e.key !== 'Backspace') {
+            letter2.focus();
+        }
+        
+    });
+
+    letter2.addEventListener('keyup', (e) => {
+        if (e.key === 'Backspace') {
+            letter1.focus();
+        }
+        else {
+            letter3.focus();
+        }
+    });
+
+    letter3.addEventListener('keyup', (e) => {
+        if (e.key === 'Backspace') {
+            letter2.focus();
+        }
+        else {
+            letter4.focus();
+        }
+    });
+
+    letter4.addEventListener('keyup', (e) => {
+        if (e.key === 'Backspace') {
+            letter3.focus();
+        }
+        else {
+            letter5.focus();
+        }
+    });
+
+    letter5.addEventListener('keyup', (e) => {
+        if (e.key === 'Backspace') {
+            letter4.focus();
+        }
+    });
+
     let button = document.querySelector("button");
-    let inputField = document.querySelector(".textfield");
+
     button.addEventListener('click', () => matchLetters(chosenWord));
-    inputField.addEventListener('keypress', (e) => {
+    letter5.addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
             matchLetters(chosenWord);
         }
@@ -27,18 +75,20 @@
 
     function matchLetters(word) {
 
-        console.log(word);
-
         if (guessNumber >= 6) {
-            inputField.setAttribute("readonly", "");
-            inputField.value = "No more guesses!";
+    
+            letter1.setAttribute("readonly", "");
+            letter2.setAttribute("readonly", "");
+            letter3.setAttribute("readonly", "");
+            letter4.setAttribute("readonly", "");
+            letter5.setAttribute("readonly", "");
+            alert("No more guesses!");
         }
 
         else {
 
-            let guessInput = document.querySelector(".textfield").value;
             let resultArray = ["", "", "", "", ""];
-            let guessArray = guessInput.toUpperCase().split("");
+            let guessArray = [letter1.value.toUpperCase(), letter2.value.toUpperCase(), letter3.value.toUpperCase(), letter4.value.toUpperCase(), letter5.value.toUpperCase()];
             let wordArray = word.toUpperCase().split("");
 
             // Refactor function to use forEach, as practice. Is this harder to read? Less obvious what the function does cos isn't named...
@@ -62,9 +112,13 @@
             alphabetString = alphabet.join('');
             alphabetDiv.innerHTML = alphabetString;
 
-            inputField.value = "";
+            letter1.value = "";
+            letter2.value = ""; 
+            letter3.value = "";
+            letter4.value = ""; 
+            letter5.value = "";
             guessNumber++;
-
+            letter1.focus();
         }
 
     }
@@ -87,26 +141,8 @@
         }
     }
 
-    /* Creating function to replace some of the repeated code above - WORK IN PROGRESS
-    function convertArraytoStrAndAppend(arr, div) {
-        let p = document.createElement('p');
-        let string = arr.join('');
-        p.innerHTML = string;
-        let divToAppend = document.querySelector(div);
-        divToAppend.append(p);
-    }
-
-    convertArraytoStrAndAppend(["Testing ", "my ", "function!"], "div#testfunction"); 
-    */
-
 }) ();
 
-/*
-matchLetters("fruit");
-matchLetters("sport");
-matchLetters("crate");
-matchLetters(chosenWord);
-*/
 
 /* Instructions to self! 
 DONE - Take input value, send it into function. 
