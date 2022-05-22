@@ -20,11 +20,20 @@ h2, h3, h4, input {
     color: #31384e;
 }
 
-input, #result, #alphabet {
+input, #result, #alphabet, letter-input {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.3em;
+}
+
+#result, #alphabet {
     letter-spacing: 0.1em;
+}
+
+letter-input {
+    border: 1px solid #31384e;
+    padding: 3px 9px;
+    text-align: center;
 }
 
 p {

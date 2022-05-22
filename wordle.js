@@ -29,10 +29,13 @@
 
         console.log(word);
 
+        // Refactor the below to work with new interface
+        
         if (guessNumber >= 6) {
             inputField.setAttribute("readonly", "");
             inputField.value = "No more guesses!";
         }
+        
 
         else {
 
@@ -87,18 +90,6 @@
         }
     }
 
-    /* Creating function to replace some of the repeated code above - WORK IN PROGRESS
-    function convertArraytoStrAndAppend(arr, div) {
-        let p = document.createElement('p');
-        let string = arr.join('');
-        p.innerHTML = string;
-        let divToAppend = document.querySelector(div);
-        divToAppend.append(p);
-    }
-
-    convertArraytoStrAndAppend(["Testing ", "my ", "function!"], "div#testfunction"); 
-    */
-
 }) ();
 
 /*
@@ -117,8 +108,13 @@ DONE WITH SLIGHT LOGIC ISSUE(?) - Log what letters have been used from alphabet 
 DONE - Wrap code in self-executing function for these reasons:
     - If you use same variable name it could cause issues - this takes all vars out of global scope.
     - Stops people hacking the chosenWord in the browser unless they are really determined!
-- Limit number of guesses to 6
-- Create an input field for each guess and return the result into each input field (how do we prevent inputting into wrong field?)
+SORT OF DONE - Limit number of guesses to 6
+PARTIALLY DONE ON BRANCH 5-INPUT-INTERFACE - Create an input field for each guess and return the result into each input field (how do we prevent inputting into wrong field?)
+
+FOR BRANCH MVC-INTERFACE:
+- Create single input field and position off view (once it's all tested.) 
+- Create display for guess/result. Guess goes into hidden input - is pushed into array and displayed in letter-input boxes. On click or enter, guess input is checked and style added to each letter-input.  
+
 - Prevent submitting guess unless it has 5 letters, and don't accept numbers or weird characters
 - Create more Wordle-like interface
 - Create result messages
