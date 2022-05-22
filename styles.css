@@ -20,43 +20,17 @@ h2, h3, h4, input {
     color: #31384e;
 }
 
+input[type=text] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* hide this by setting to 100000 or something later */
+}
+
 input, #result, #alphabet, letter-input {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.3em;
-}
-
-#result, #alphabet {
-    letter-spacing: 0.1em;
-}
-
-letter-input {
-    border: 1px solid #31384e;
-    padding: 3px 9px;
-    text-align: center;
-}
-
-p {
-    margin-bottom: 0;
-}
-
-button {
-    background:#035379;
-    color: #ffffff;
-    padding: 5px 20px;
-    border: none;
-}
-
-.correct {
-    color: #03a340;
-}
-
-.halfcorrect {
-    color: #f3cf04;
-}
-
-.incorrect {
-    color: #919191;
 }
 
 #content {
@@ -71,6 +45,48 @@ button {
 #alphabet {
     color: #252525;
     padding-top: 30px;
+}
+
+#result, #alphabet {
+    letter-spacing: 0.1em;
+}
+
+letter-block {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+letter-input {
+    border: 1px solid #31384e;
+    padding: 3px 9px;
+    text-align: center;
+    margin: 5px;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+button {
+    background:#035379;
+    color: #ffffff;
+    padding: 5px 20px;
+    border: none;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.correct {
+    color: #03a340;
+}
+
+.halfcorrect {
+    color: #f3cf04;
+}
+
+.incorrect {
+    color: #919191;
 }
 
 .singleletter {
