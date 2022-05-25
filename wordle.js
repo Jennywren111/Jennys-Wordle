@@ -12,24 +12,47 @@
     let chosenWord = words[Math.floor(Math.random() * words.length)];
     let guessNumber = 0;
 
-    let alphabetString = alphabet.join('');
+    // let alphabetString = alphabet.join('');
     let alphabetDiv = document.querySelector("#alphabet");
-    alphabetDiv.innerHTML = alphabetString;
+    alphabetDiv.innerHTML = alphabetIndex;
 
-    let button = document.querySelector("button");
+    // let button = document.querySelector("button"); // removing button stuff
     let inputField = document.querySelector(".textfield");
-    button.addEventListener('click', () => matchLetters(chosenWord));
-    inputField.addEventListener('keypress', (e) => {
+    // button.addEventListener('click', () => matchLetters(chosenWord));  // removing button stuff
+    inputField.addEventListener('keyup', (e) => {
+   
+        updateDisplay(inputField.value, e);
+
         if (e.key === 'Enter') {
             matchLetters(chosenWord);
         }
+        
     });
+
+    function updateDisplay(guessInput, e) {
+
+        let displayLetters = document.querySelectorAll("letter-input");
+        let guessArray = guessInput.toUpperCase().split("");
+        displayLetters.forEach(function(box, index) {
+            if (guessArray[index]) {
+                box.innerHTML = guessArray[index];
+            }
+            else {
+                box.innerHTML = " ";
+            }
+        });
+        guessArray.forEach(function(letter, index) {
+            displayLetters[index].innerHTML = letter;
+        });
+        console.log(guessInput);
+        
+    }
 
     function matchLetters(word) {
 
         console.log(word);
 
-        // Refactor the below to work with new interface
+        // Refactor the below to work with new interface - is broken now! :D 
         
         if (guessNumber >= 6) {
             inputField.setAttribute("readonly", "");
@@ -39,9 +62,10 @@
 
         else {
 
-            let guessInput = document.querySelector(".textfield").value;
+            // guessInput needs to feed live into the 'display' boxes. 
+            // Moving this line into the updateDisplay function: let guessInput = document.querySelector(".textfield").value;
             let resultArray = ["", "", "", "", ""];
-            let guessArray = guessInput.toUpperCase().split("");
+            // Moving this line to updateDisplay function: let guessArray = guessInput.toUpperCase().split("");
             let wordArray = word.toUpperCase().split("");
 
             // Refactor function to use forEach, as practice. Is this harder to read? Less obvious what the function does cos isn't named...
