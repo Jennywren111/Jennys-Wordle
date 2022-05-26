@@ -3,9 +3,6 @@
 
     let words = ["daisy", "henge", "roots", "bathe", "shoes", "fluff", "dirty", "clean", "roads", "kitty", "tiger", "grass", "bench", "range", "acres", "blank", "walls", "viola", "words", "hives", "hover", "mouse", "honey", "scarf", "trees", "hares", "books", "tease", "zebra", "lolly"];
     
-    // Why does this array only seem to receive the first 'change' - for example, on first guess you get 'A' correct but in incorrect place, A goes yellow. If you get it in the correct place on guess 2, it doesn't go green. WHYYYY??? Console seems to log the new version at that position but in the actual array it's not there. Grrr.
-    // OF COURSE!!!! The function can't find the index of 'A' in alphabet cos it's been changed to <span> etc. So it doesn't add the new colour. 
-    // Maybe I need 2 arrays, one immutable alphabet string to find the index of the guess letter, and the existing alphabet array to actually be changed. 
     const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
     const alphabetIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -16,65 +13,40 @@
     let alphabetDiv = document.querySelector("#alphabet");
     alphabetDiv.innerHTML = alphabetString;
 
-    // input fields
-    let letter1 = document.querySelector('#letter1');
-    let letter2 = document.querySelector('#letter2');
-    let letter3 = document.querySelector('#letter3');
-    let letter4 = document.querySelector('#letter4');
-    let letter5 = document.querySelector('#letter5');
+    let inputField = document.querySelector(".textfield");
 
-    // Autotab code - backspace has been a bit buggy (is it just slow using this method?) - keep an eye!! Also, keyup, keydown and keypress all seem to behave differently. Why??
-    letter1.addEventListener('keyup', (e) => {
-        if (e.key !== 'Backspace') {
-            letter2.focus();
+    inputField.addEventListener('keyup', (e) => {
+   
+        updateDisplay(inputField.value, e, chosenWord);
+
+    });
+
+    function updateDisplay(guess, e, word) {
+
+        let displayLetters = document.querySelectorAll("letter-input");
+        let guessArray = guess.toUpperCase().split("");  // Do I really need to split this into an array in this function? Could just turn the word uppercase
+
+        if (e.key === 'Enter' && guess.length === 5) {
+            if (e.key === 'Enter') {
+                matchLetters(guess, word);
+            }
         }
+
+        displayLetters.forEach(function(box, index) {
+            if (guessArray[index]) {
+                box.innerHTML = guessArray[index];
+            }
+            else {
+                box.innerHTML = " ";
+            }
+        });
         
-    });
+    }
 
-    letter2.addEventListener('keyup', (e) => {
-        if (e.key === 'Backspace') {
-            letter1.focus();
-        }
-        else {
-            letter3.focus();
-        }
-    });
+    function matchLetters(guess, word) {
 
-    letter3.addEventListener('keyup', (e) => {
-        if (e.key === 'Backspace') {
-            letter2.focus();
-        }
-        else {
-            letter4.focus();
-        }
-    });
-
-    letter4.addEventListener('keyup', (e) => {
-        if (e.key === 'Backspace') {
-            letter3.focus();
-        }
-        else {
-            letter5.focus();
-        }
-    });
-
-    letter5.addEventListener('keyup', (e) => {
-        if (e.key === 'Backspace') {
-            letter4.focus();
-        }
-    });
-
-    let button = document.querySelector("button");
-
-    button.addEventListener('click', () => matchLetters(chosenWord));
-    letter5.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-            matchLetters(chosenWord);
-        }
-    });
-
-    function matchLetters(word) {
-
+        console.log(word);
+        
         if (guessNumber >= 6) {
     
             letter1.setAttribute("readonly", "");
@@ -84,14 +56,14 @@
             letter5.setAttribute("readonly", "");
             alert("No more guesses!");
         }
+        
 
         else {
 
-            let resultArray = ["", "", "", "", ""];
-            let guessArray = [letter1.value.toUpperCase(), letter2.value.toUpperCase(), letter3.value.toUpperCase(), letter4.value.toUpperCase(), letter5.value.toUpperCase()];
+            let resultArray = ["", "", "", "", ""]; 
+            let guessArray = guess.toUpperCase().split("");
             let wordArray = word.toUpperCase().split("");
 
-            // Refactor function to use forEach, as practice. Is this harder to read? Less obvious what the function does cos isn't named...
             guessArray.forEach(function(letter, index, guess) {
                     if (letter === wordArray[index]) {
                         resultArray[index] = `<span class=\"correct\">${letter}</span>`;
@@ -153,8 +125,13 @@ DONE WITH SLIGHT LOGIC ISSUE(?) - Log what letters have been used from alphabet 
 DONE - Wrap code in self-executing function for these reasons:
     - If you use same variable name it could cause issues - this takes all vars out of global scope.
     - Stops people hacking the chosenWord in the browser unless they are really determined!
-- Limit number of guesses to 6
-- Create an input field for each guess and return the result into each input field (how do we prevent inputting into wrong field?)
+SORT OF DONE - Limit number of guesses to 6
+PARTIALLY DONE ON BRANCH 5-INPUT-INTERFACE - Create an input field for each guess and return the result into each input field (how do we prevent inputting into wrong field?)
+
+FOR BRANCH MVC-INTERFACE:
+- Create single input field and position off view (once it's all tested.) 
+- Create display for guess/result. Guess goes into hidden input - is pushed into array and displayed in letter-input boxes. On click or enter, guess input is checked and style added to each letter-input.  
+
 - Prevent submitting guess unless it has 5 letters, and don't accept numbers or weird characters
 - Create more Wordle-like interface
 - Create result messages

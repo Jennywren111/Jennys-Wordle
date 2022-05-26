@@ -12,16 +12,18 @@
 </head>
 <body>
     <div id="content">
-        <h1>Jenny's Wordle</h1>
+        <header><h1>Jenny's Wordle</h1></header>
         <h2>Welcome to my programming experiment... Try and guess the 5 letter word!</h2>
         <h3>Type in a word and click the button or hit enter. Your result will show underneath. Green letters are in the correct place! Yellow letters are in the word, but somewhere else. Grey letters aren't in the word at all. Good luck!</h3>
         <h4>(PS... I am very much a work in progress!)</h4>
-        <input type="text" class="singleletter" maxlength="1" id="letter1"></input>
-        <input type="text" class="singleletter" maxlength="1" id="letter2"></input>
-        <input type="text" class="singleletter" maxlength="1" id="letter3"></input>
-        <input type="text" class="singleletter" maxlength="1" id="letter4"></input>
-        <input type="text" class="singleletter" maxlength="1" id="letter5"></input>
-        <button>Check my word</button>
+        <input type="text" class="textfield" maxlength="5"></input>
+        <letter-block>
+            <letter-input id="letter1"></letter-input>
+            <letter-input id="letter2"></letter-input>
+            <letter-input id="letter3"></letter-input>
+            <letter-input id="letter4"></letter-input>
+            <letter-input id="letter5"></letter-input>
+        </letter-block>
         <div id="result"></div>
         <div id="alphabet"></div>
         <div id="testfunction"></div>
