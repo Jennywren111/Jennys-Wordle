@@ -48,13 +48,8 @@
         console.log(word);
         
         if (guessNumber >= 6) {
-    
-            letter1.setAttribute("readonly", "");
-            letter2.setAttribute("readonly", "");
-            letter3.setAttribute("readonly", "");
-            letter4.setAttribute("readonly", "");
-            letter5.setAttribute("readonly", "");
-            alert("No more guesses!");
+            inputField.setAttribute("readonly", "");
+            inputField.value = "No more guesses!";
         }
         
 
@@ -84,13 +79,9 @@
             alphabetString = alphabet.join('');
             alphabetDiv.innerHTML = alphabetString;
 
-            letter1.value = "";
-            letter2.value = ""; 
-            letter3.value = "";
-            letter4.value = ""; 
-            letter5.value = "";
+            inputField.value = "";
             guessNumber++;
-            letter1.focus();
+
         }
 
     }
@@ -115,6 +106,12 @@
 
 }) ();
 
+/*
+matchLetters("fruit");
+matchLetters("sport");
+matchLetters("crate");
+matchLetters(chosenWord);
+*/
 
 /* Instructions to self! 
 DONE - Take input value, send it into function. 
