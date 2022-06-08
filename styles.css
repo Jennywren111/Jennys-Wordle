@@ -52,7 +52,7 @@ input, #result, #alphabet, letter-input {
     letter-spacing: 0.1em;
 }
 
-letter-block {
+letter-block-0, letter-block-1, letter-block-2, letter-block-3, letter-block-4, letter-block-5 {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;

@@ -23,8 +23,8 @@
 
     function updateDisplay(guess, e, word) {
 
-        let displayLetters = document.querySelectorAll("letter-input");
-        let guessArray = guess.toUpperCase().split("");  // Do I really need to split this into an array in this function? Could just turn the word uppercase
+        let displayLetters = document.querySelectorAll(`letter-block-${guessNumber} > letter-input`);  // (Can we use a template literal to make displayLetters a different set of boxes each time?) UPDATE - YES WE CAN AND WE DID!!!! :D 
+        let guessArray = guess.toUpperCase().split(""); 
 
         if (e.key === 'Enter' && guess.length === 5) {
             if (e.key === 'Enter') {
@@ -55,7 +55,7 @@
 
         else {
 
-            let resultArray = ["", "", "", "", ""]; 
+            let resultArray = ["", "", "", "", ""];  // Either remove this, or use it to populate displayLetters? We may need to use guessNumber to populate a different displayLetters each time and give it focus?
             let guessArray = guess.toUpperCase().split("");
             let wordArray = word.toUpperCase().split("");
 
@@ -70,6 +70,7 @@
 
             markSemicorrectMatches(guessArray, wordArray, resultArray);
             
+            // Won't need the below 5 lines once the displayLetters is updated. 
             let resultParagraph = document.createElement('p');
             let resultString = resultArray.join('');
             resultParagraph.innerHTML = resultString;
