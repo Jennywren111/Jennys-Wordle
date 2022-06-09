@@ -23,11 +23,11 @@
 
     function updateDisplay(guess, e, word) {
 
-        let displayLetters = document.querySelectorAll(`letter-block-${guessNumber} > letter-input`);  // (Can we use a template literal to make displayLetters a different set of boxes each time?) UPDATE - YES WE CAN AND WE DID!!!! :D 
+        let displayLetters = document.querySelectorAll(`letter-block-${guessNumber} > letter-input`); 
         let guessArray = guess.toUpperCase().split(""); 
 
         if (e.key === 'Enter' && guess.length === 5) {
-            matchLetters(guess, word);
+            matchLetters(guess, word, displayLetters);
         }
 
         displayLetters.forEach(function(box, index) {
@@ -41,7 +41,7 @@
         
     }
 
-    function matchLetters(guess, word) {
+    function matchLetters(guess, word, boxes) {
 
         console.log(word);
         
@@ -53,20 +53,13 @@
 
         else {
 
-            let resultArray = ["", "", "", "", ""];  // Either remove this, or use it to populate displayLetters? We may need to use guessNumber to populate a different displayLetters each time and give it focus?
+            // let resultArray = ["", "", "", "", ""];  
             let guessArray = guess.toUpperCase().split("");
             let wordArray = word.toUpperCase().split("");
 
-            markCorrectMatches(guessArray, wordArray, resultArray);
+            markCorrectMatches(guessArray, wordArray, boxes);
 
-            markSemicorrectMatches(guessArray, wordArray, resultArray);
-            
-            // Won't need the below 5 lines once the displayLetters is updated. 
-            let resultParagraph = document.createElement('p');
-            let resultString = resultArray.join('');
-            resultParagraph.innerHTML = resultString;
-            let resultDiv = document.querySelector("div#result");
-            resultDiv.append(resultParagraph);
+            markSemicorrectMatches(guessArray, wordArray, boxes);
 
             alphabetString = alphabet.join('');
             alphabetDiv.innerHTML = alphabetString;
@@ -78,27 +71,27 @@
 
     }
 
-    function markCorrectMatches(guess, word, result) {
+    function markCorrectMatches(guess, word, boxes) {
         guess.forEach(function (letter, index, guess) {
             if (letter === word[index]) {
-                result[index] = `<span class=\"correct\">${letter}</span>`;
                 alphabet[alphabetIndex.indexOf(letter.toUpperCase())] = `<span class=\"correct\">${letter}</span>`;
+                boxes[index].classList.add("correct");
                 word[index] = "_";
                 guess[index] = ".";
             }
         });
     }
 
-    function markSemicorrectMatches(guess, word, result) {
+    function markSemicorrectMatches(guess, word, boxes) {
         guess.forEach(function (letter, index, guess) {
             if (word.indexOf(letter) !== -1) {
-                result[index] = `<span class=\"halfcorrect\">${letter}</span>`;
                 alphabet[alphabet.indexOf(letter.toUpperCase())] = `<span class=\"halfcorrect\">${letter}</span>`;
-                word[index] = "_";
+                boxes[index].classList.add("halfcorrect");
+                word[word.indexOf(letter.toUpperCase())] = "_";
                 guess[index] = ".";
             }
             else if (letter !== ".") {
-                result[index] = `<span class=\"incorrect\">${letter}</span>`;
+                boxes[index].classList.add("incorrect");
                 alphabet[alphabet.indexOf(letter.toUpperCase())] = `<span class=\"incorrect\">${letter}</span>`;
             }
         });
