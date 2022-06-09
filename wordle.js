@@ -27,9 +27,7 @@
         let guessArray = guess.toUpperCase().split(""); 
 
         if (e.key === 'Enter' && guess.length === 5) {
-            if (e.key === 'Enter') {
-                matchLetters(guess, word);
-            }
+            matchLetters(guess, word);
         }
 
         displayLetters.forEach(function(box, index) {
@@ -59,14 +57,7 @@
             let guessArray = guess.toUpperCase().split("");
             let wordArray = word.toUpperCase().split("");
 
-            guessArray.forEach(function(letter, index, guess) {
-                    if (letter === wordArray[index]) {
-                        resultArray[index] = `<span class=\"correct\">${letter}</span>`;
-                        alphabet[alphabetIndex.indexOf(letter.toUpperCase())] = `<span class=\"correct\">${letter}</span>`;
-                        wordArray[index] = "_";
-                        guess[index] = ".";
-                    }
-            });
+            markCorrectMatches(guessArray, wordArray, resultArray);
 
             markSemicorrectMatches(guessArray, wordArray, resultArray);
             
@@ -87,22 +78,30 @@
 
     }
 
+    function markCorrectMatches(guess, word, result) {
+        guess.forEach(function (letter, index, guess) {
+            if (letter === word[index]) {
+                result[index] = `<span class=\"correct\">${letter}</span>`;
+                alphabet[alphabetIndex.indexOf(letter.toUpperCase())] = `<span class=\"correct\">${letter}</span>`;
+                word[index] = "_";
+                guess[index] = ".";
+            }
+        });
+    }
+
     function markSemicorrectMatches(guess, word, result) {
-
-        for (let i = 0; i < guess.length; i++) {
-
-            if (word.indexOf(guess[i]) !== -1) {
-                result[i] = `<span class=\"halfcorrect\">${guess[i]}</span>`;
-                alphabet[alphabet.indexOf(guess[i].toUpperCase())] = `<span class=\"halfcorrect\">${guess[i]}</span>`;
-                word[word.indexOf(guess[i])] = "_";
-                guess[i] = ".";
+        guess.forEach(function (letter, index, guess) {
+            if (word.indexOf(letter) !== -1) {
+                result[index] = `<span class=\"halfcorrect\">${letter}</span>`;
+                alphabet[alphabet.indexOf(letter.toUpperCase())] = `<span class=\"halfcorrect\">${letter}</span>`;
+                word[index] = "_";
+                guess[index] = ".";
             }
-
-            else if (guess[i] !== ".") {
-                result[i] = `<span class=\"incorrect\">${guess[i]}</span>`;
-                alphabet[alphabet.indexOf(guess[i].toUpperCase())] = `<span class=\"incorrect\">${guess[i]}</span>`;
+            else if (letter !== ".") {
+                result[index] = `<span class=\"incorrect\">${letter}</span>`;
+                alphabet[alphabet.indexOf(letter.toUpperCase())] = `<span class=\"incorrect\">${letter}</span>`;
             }
-        }
+        });
     }
 
 }) ();
