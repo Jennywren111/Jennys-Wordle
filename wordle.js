@@ -53,7 +53,6 @@
 
         else {
 
-            // let resultArray = ["", "", "", "", ""];  
             let guessArray = guess.toUpperCase().split("");
             let wordArray = word.toUpperCase().split("");
 
@@ -98,35 +97,3 @@
     }
 
 }) ();
-
-/*
-matchLetters("fruit");
-matchLetters("sport");
-matchLetters("crate");
-matchLetters(chosenWord);
-*/
-
-/* Instructions to self! 
-DONE - Take input value, send it into function. 
-DONE - function needs to push items into array (problems - how to add the letter plus the span HTML?)
-DONE - eventually, will need to run the function on click
-DONE - Add ability to hit enter key to submit guess
-DONE WITH SLIGHT LOGIC ISSUE(?) - Log what letters have been used from alphabet (currently retains first colour, i.e. stays green if you got a letter's position correctly, stays yellow if incorrect position, even when you get it in right position) UPDATE - turns out that's how real Wordle works too, well at least for green letters - check yellows! 
-DONE - Wrap code in self-executing function for these reasons:
-    - If you use same variable name it could cause issues - this takes all vars out of global scope.
-    - Stops people hacking the chosenWord in the browser unless they are really determined!
-SORT OF DONE - Limit number of guesses to 6
-PARTIALLY DONE ON BRANCH 5-INPUT-INTERFACE - Create an input field for each guess and return the result into each input field (how do we prevent inputting into wrong field?)
-
-FOR BRANCH MVC-INTERFACE:
-- Create single input field and position off view (once it's all tested.) 
-- Create display for guess/result. Guess goes into hidden input - is pushed into array and displayed in letter-input boxes. On click or enter, guess input is checked and style added to each letter-input.  
-
-- Prevent submitting guess unless it has 5 letters, and don't accept numbers or weird characters
-- Create more Wordle-like interface
-- Create result messages
-DONE FOR NOW! - Refactor function (split into fewer?), array methods might be better than for loops?
-- REMOVE REPETITION!!!? Particularly on the alphabet generating code.
-- Look to eventually rebuild using framework such as React
-*/
-
