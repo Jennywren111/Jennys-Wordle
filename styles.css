@@ -24,7 +24,10 @@ input[type=text] {
     position: absolute;
     top: 0;
     left: 0;
-    /* hide this by setting to 100000 or something later */
+    right: 0;
+    bottom: 0;
+    z-index: 1000; 
+    opacity: 0;
 }
 
 input, #result, #alphabet, letter-input {
